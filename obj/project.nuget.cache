@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mz2SnSR6GufSvYOzQZ7tHY4RMhr3zzqTyMzws5Jlk8V/Z6OECYQ1+3j72jmauULt1bGr4ylEEiCJVxW9TG97+Q==",
+  "success": true,
+  "projectFilePath": "/home/xacheri/Repos/kanboss/kanboss.csproj",
+  "expectedPackageFiles": [
+    "/home/xacheri/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.5/microsoft.aspnetcore.app.ref.8.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}
