@@ -2,7 +2,7 @@ namespace kanboss
 {
     public class Config : IConfig
     {
-        private static IConfig _instance;
+        private static Config _instance;
         private IColorScheme _colorScheme;
         private string _colorSchemePath;
         private string _version;
@@ -35,7 +35,7 @@ namespace kanboss
             }
             _rawJson = File.ReadAllText(jsonPath);
             string colorSchemeFromJson = System.Text.Json.JsonDocument.Parse(_rawJson).RootElement.GetProperty("_colorScheme").GetString();
-
+ 
             // load the color scheme 
             _colorSchemePath = Path.Combine(_appDataPath, colorSchemeFromJson);
             if (!File.Exists(_colorSchemePath))
@@ -66,7 +66,25 @@ namespace kanboss
 
         public bool Save()
         {
-            // Save the configuration to the app data path
+            try 
+            {
+                // save the color scheme details
+                File.WriteAllText(_colorSchemePath, _colorScheme.GetRawJson());
+                
+                string json = System.Text.Json.JsonSerializer.Serialize(new
+                {
+                    _version = _version,
+                    _colorSchemePath = _colorSchemePath,
+
+                });
+                
+                File.WriteAllText(Path.Combine(_appDataPath, "config.json"), json);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("Error saving configuration: " + e.Message + "\n" + e.StackTrace);
+                return false;
+            }
             return true;
         }
 
